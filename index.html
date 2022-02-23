@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    *{
+      margin: 0px;
+      padding: 0px;
+      box-sizing: border-box;
+    }
+
+    .main-container{
+      margin: auto;
+      display: grid;
+      grid-template-rows: 150px 400px;
+      height: 570px;
+      width: 420px;
+      padding: 10px;
+      background-color: red;
+    }
+    .display-container{
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      width: 400px;
+      background-color: green;
+    }
+
+    .textbox{
+      height: 70px;
+      margin-bottom: 10px;
+      /* direction: rtl; */
+      text-align: right;
+      font-size: 40px;
+    }
+
+    .clear-btn{
+      height: 50px;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .buttons-container{
+      display: grid;
+      width: 400px;
+      grid-template-columns: 100px 100px 100px 100px;
+      grid-template-rows: 100px 100px 100px 100px;
+      background-color: yellow;
+    }
+
+    .btn{
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      font-size: 30px;
+      font-weight: 700;
+      justify-self: center;
+      align-self: center;
+    }
+  </style>
+  <title>calculator</title>
+</head>
+<body>
+  <div class="main-container">
+    <div class="display-container">
+      <input type="text" class="textbox" value="" placeholder="0">
+      <button class="clear-btn" onclick="clr()">CLEAR</button>
+    </div>
+    <div class="buttons-container">
+      <button class="btn" onclick="display('7')">7</button>
+      <button class="btn" onclick="display('8')">8</button>
+      <button class="btn" onclick="display('9')">9</button>
+      <button class="btn" onclick="display('+')">+</button>
+      <button class="btn" onclick="display('4')">4</button>
+      <button class="btn" onclick="display('5')">5</button>
+      <button class="btn" onclick="display('6')">6</button>
+      <button class="btn" onclick="display('-')">-</button>
+      <button class="btn" onclick="display('1')">1</button>
+      <button class="btn" onclick="display('2')">2</button>
+      <button class="btn" onclick="display('3')">3</button>
+      <button class="btn" onclick="display('*')">*</button>
+      <button class="btn" onclick="display('0')">0</button>
+      <button class="btn" onclick="display('.')">.</button>
+      <button class="btn" onclick="display('/')">/</button>
+      <button class="btn" onclick="calculate()">=</button>
+    </div>
+  </div>
+  <script>
+    function display(str){
+
+      if((/[\+\-\*\/]$/.test( document.querySelector(".textbox").value)) && (/[\+\-\*\/]/.test(str)) ){
+        let text = document.querySelector(".textbox").value;
+        let new_text = text.slice(0,text.length - 1)
+        document.querySelector(".textbox").value = new_text + str;
+      }else{
+        document.querySelector(".textbox").value += str;
+      }
+
+    }
+
+    function calculate(){
+      const result = eval(document.querySelector(".textbox").value);
+      document.querySelector(".textbox").value = result;
+    }
+
+    function clr(){
+      document.querySelector(".textbox").value = "";
+    }
+  </script>
+</body>
+</html>
